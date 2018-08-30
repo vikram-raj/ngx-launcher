@@ -79,7 +79,13 @@
   <div>
     <div class="container-fluid">
       <div class="f8launcher-continue">
-        <button class="btn btn-primary btn-lg"  (click)="launcherComponent.completed()">View New Application</button>
+        <button class="btn btn-primary btn-lg" (click)="launcherComponent.completed()">View New Application</button>
+        <button class="btn btn-primary btn-lg"
+          *ngIf="launcherComponent.flow === 'osio'"
+          [disabled]="!codeBaseCreated"
+          (click)="createWorkSpace()">
+          Open IDE
+        </button>
       </div>
     </div>
   </div>

@@ -24,6 +24,8 @@ export { ProjectProgressService } from './src/app/launcher/service/project-progr
 export { ProjectSummaryService } from './src/app/launcher/service/project-summary.service';
 export { TargetEnvironmentService } from './src/app/launcher/service/target-environment.service';
 export { TokenService } from './src/app/launcher/service/token.service';
+export { WorkSpacesService } from './src/app/launcher/service/workSpaces.service';
+export { CheService } from './src/app/launcher/service/che.service';
 
 // Utility Service
 export { AuthHelperService } from './src/app/launcher/service/auth-provider.service';

@@ -1,6 +1,7 @@
 import { NgModule, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-modal';
 
 import {
@@ -55,6 +56,8 @@ import { ToastNotificationComponent } from './toast-notification/toast-notificat
 import { InViewportModule, WindowRef } from '@thisissoon/angular-inviewport';
 import { MissionRuntimeService } from './service/mission-runtime.service';
 import { ProjectProgressService } from './service/project-progress.service';
+import { WorkSpacesService } from './service/workSpaces.service';
+import { CheService } from './service/che.service';
 
 import { LauncherComponent } from './launcher.component';
 
@@ -72,6 +75,7 @@ export const providers: Provider[] = [
     ModalModule,
     InViewportModule.forRoot(providers),
     PopoverModule.forRoot(),
+    RouterModule,
     SortArrayPipeModule,
     ToolbarModule,
     TruncatePipeModule,
@@ -133,6 +137,8 @@ export { ProjectProgressService } from './service/project-progress.service';
 export { ProjectSummaryService } from './service/project-summary.service';
 export { TargetEnvironmentService } from './service/target-environment.service';
 export { TokenService } from './service/token.service';
+export { WorkSpacesService } from './service/workSpaces.service';
+export { CheService } from './service/che.service';
 
 // Utility Service
 export { HelperService } from './service/helper.service';
