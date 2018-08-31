@@ -2,6 +2,7 @@ import { NgModule, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-modal';
+import { RouterModule } from '@angular/router';
 
 import {
   DependencyEditorModule,
@@ -72,6 +73,7 @@ export const providers: Provider[] = [
     ModalModule,
     InViewportModule.forRoot(providers),
     PopoverModule.forRoot(),
+    RouterModule,
     SortArrayPipeModule,
     ToolbarModule,
     TruncatePipeModule,
