@@ -80,10 +80,13 @@
     <div class="container-fluid">
       <div class="f8launcher-continue">
         <button class="btn btn-primary btn-lg"  (click)="launcherComponent.completed()">View New Application</button>
-        <a class="btn btn-primary btn-lg"
-          *ngIf="launcherComponent.flow === 'osio'"
-          [routerLink]="['../../../', 'create', 'pipelines']"
-          [queryParams]="addQuery()">View Pipelines</a>
+        <f8-feature-toggle featureName="AppLauncher.ViewPipeline" [userLevel]="viewPipeline"></f8-feature-toggle>
+        <ng-template #viewPipeline>
+          <a class="btn btn-primary btn-lg"
+            *ngIf="launcherComponent.flow === 'osio'"
+            [routerLink]="['../../../', 'create', 'pipelines']"
+            [queryParams]="addQuery()">View Pipelines</a>
+        </ng-template>
       </div>
     </div>
   </div>
