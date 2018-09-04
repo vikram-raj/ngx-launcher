@@ -4,8 +4,6 @@ import { Progress } from '../../model/progress.model';
 import { ProjectProgressService } from '../../service/project-progress.service';
 import { LauncherComponent } from '../../launcher.component';
 import { Broadcaster } from 'ngx-base';
-import { WorkSpacesService } from '../../service/workSpaces.service';
-import { CheService } from '../../service/che.service';
 
 
 @Component({
@@ -18,16 +16,12 @@ export class ProjectProgressImportappNextstepComponent implements OnChanges, OnD
   @Input() statusLink: string;
   isError = false;
   errorMessage = '';
-  codeBaseCreated: boolean = false;
-  codebaseId: string;
   private _progress: Progress[];
   private socket: WebSocket;
 
   constructor(@Host() public launcherComponent: LauncherComponent,
               private broadcaster: Broadcaster,
-              private projectProgressService: ProjectProgressService,
-              private workSpaceService: WorkSpacesService,
-              private cheService: CheService) {
+              private projectProgressService: ProjectProgressService) {
     this.broadcaster.on('progressEvents').subscribe((events: Progress[]) => this._progress = events);
   }
 
@@ -38,10 +32,6 @@ export class ProjectProgressImportappNextstepComponent implements OnChanges, OnD
       this.socket.onmessage = (event: MessageEvent) => {
         let message = JSON.parse(event.data);
         let data = message.data || {};
-        if (data.codeBaseId !== undefined) {
-          this.codeBaseCreated = true;
-          this.codebaseId = data.codeBaseId;
-        }
         if (data && data.error) {
           this.isError = true;
           this.errorMessage = data.error;
@@ -68,17 +58,6 @@ export class ProjectProgressImportappNextstepComponent implements OnChanges, OnD
 
   ngOnDestroy() {
     this.closeConnections();
-  }
-
-  createWorkSpace() {
-    this.cheService.getState().subscribe(che => {
-      if (!che.clusterFull) {
-        return this.workSpaceService.createWorkSpace(this.codebaseId)
-          .map(workSpaceLinks => {
-            console.log(workSpaceLinks, '####-99');
-          });
-      }
-    });
   }
 
   // Accessors

@@ -61,6 +61,8 @@ import { CheService } from './service/che.service';
 
 import { LauncherComponent } from './launcher.component';
 
+import { FeatureFlagModule } from 'ngx-feature-flag';
+
 // Provide window object so as to not break SSR if using universal
 export const providers: Provider[] = [
   { provide: WindowRef, useValue: window }
@@ -71,6 +73,7 @@ export const providers: Provider[] = [
     BsDropdownModule.forRoot(),
     CommonModule,
     DependencyEditorModule,
+    FeatureFlagModule,
     FormsModule,
     ModalModule,
     InViewportModule.forRoot(providers),
