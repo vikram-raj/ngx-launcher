@@ -20,21 +20,21 @@ export function broadcast(event: string, properties: any): MethodDecorator {
 
         const originalMethod = descriptor.value;
 
-        descriptor.value = function (...args: any[]) {
-            const injectorInstance = StaticInjector.getInjector();
-            if (!injectorInstance || !injectorInstance.get(Broadcaster)) {
-                return originalMethod.apply(this, args);
-            }
+        // descriptor.value = function (...args: any[]) {
+        //     const injectorInstance = StaticInjector.getInjector();
+        //     if (!injectorInstance || !injectorInstance.get(Broadcaster)) {
+        //         return originalMethod.apply(this, args);
+        //     }
 
-            const broadcaster: Broadcaster = injectorInstance.get(Broadcaster);
-            const values = new PropertiesGetter(this, args).mapKeys(_.cloneDeep(properties));
+        //     const broadcaster: Broadcaster = injectorInstance.get(Broadcaster);
+        //     const values = new PropertiesGetter(this, args).mapKeys(_.cloneDeep(properties));
 
-            broadcaster.broadcast('analyticsTracker', {
-                event: eventKeyMap[event],
-                data: values
-            });
-            return originalMethod.apply(this, args);
-        };
+        //     broadcaster.broadcast('analyticsTracker', {
+        //         event: eventKeyMap[event],
+        //         data: values
+        //     });
+        //     return originalMethod.apply(this, args);
+        // };
 
         return descriptor;
     };

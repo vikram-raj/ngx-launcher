@@ -1,8 +1,10 @@
+import { Broadcaster } from 'ngx-base';
 import { NgModule, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-modal';
+import { FeatureFlagModule } from 'ngx-feature-flag';
 
 import {
   DependencyEditorModule,
@@ -61,8 +63,6 @@ import { CheService } from './service/che.service';
 
 import { LauncherComponent } from './launcher.component';
 
-import { FeatureFlagModule } from 'ngx-feature-flag';
-
 // Provide window object so as to not break SSR if using universal
 export const providers: Provider[] = [
   { provide: WindowRef, useValue: window }
@@ -111,7 +111,8 @@ export const providers: Provider[] = [
     LauncherComponent
   ],
   providers: [
-    BsDropdownConfig
+    BsDropdownConfig,
+    Broadcaster
   ]
 })
 export class LauncherModule {

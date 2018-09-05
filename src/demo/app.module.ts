@@ -26,6 +26,8 @@ import { DemoProjectProgressService } from './service/demo-project-progress.serv
 import { DemoProjectSummaryService } from './service/demo-project-summary.service';
 import { DemoTargetEnvironmentService } from './service/demo-target-environment.service';
 import { DemoTokenService } from './service/demo-token.service';
+import { DemoCheService } from './service/demo-che.service';
+import { DemoWorkSpacesService } from './service/demo-workSpaces.service';
 
 import { Config } from '../app/service/config.component';
 import { ForgeConfig } from './shared/forge-config';
@@ -47,7 +49,9 @@ import {
   ProjectProgressService,
   ProjectSummaryService,
   TargetEnvironmentService,
-  TokenService
+  TokenService,
+  CheService,
+  WorkSpacesService
 } from '../app/launcher/launcher.module';
 
 @NgModule({
@@ -84,7 +88,9 @@ import {
     { provide: TokenProvider, useClass: MockAuthenticationService },
     { provide: TokenService, useClass: DemoTokenService},
     { provide: DependencyEditorTokenProvider, useExisting: TokenProvider },
-    { provide: URLProvider, useClass: AnalyticsUrlService }
+    { provide: URLProvider, useClass: AnalyticsUrlService },
+    { provide: CheService, useClass: DemoCheService },
+    { provide: WorkSpacesService, useClass: DemoWorkSpacesService }
   ],
   bootstrap: [AppComponent]
 })
