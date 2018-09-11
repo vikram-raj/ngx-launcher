@@ -104,6 +104,13 @@ export class ProjectProgressCreateappNextstepComponent implements OnChanges, OnD
     }).subscribe();
   }
 
+  addQuery() {
+    let query = '{\"application\":[\"' + this.launcherComponent.currentSelection.projectName + '\"]}';
+    return {
+      q: query
+    };
+  }
+
   retry() {
     const failedStep = this.lastCompleted;
     this.projectSummaryService.setup(

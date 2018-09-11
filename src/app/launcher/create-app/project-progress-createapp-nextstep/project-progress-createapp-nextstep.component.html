@@ -156,15 +156,16 @@
     <div class="container-fluid">
       <div class="f8launcher-continue">
         <button class="btn btn-primary btn-lg" (click)="launcherComponent.completed()">{{ launcherComponent.flow === 'osio' ? 'View New Application' : 'Start a new project' }}</button>
-        <f8-feature-toggle featureName="AppLauncher.OpenIDE" [userLevel]="openIDE"></f8-feature-toggle>
-        <ng-template #openIDE>
+          <a class="btn btn-primary btn-lg"
+            *ngIf="launcherComponent.flow === 'osio'"
+            [routerLink]="['../../../', 'create', 'pipelines']"
+            [queryParams]="addQuery()">View Pipelines</a>
           <button class="btn btn-primary btn-lg"
             *ngIf="launcherComponent.flow === 'osio'"
             [disabled]="!codeBaseCreated"
             (click)="createWorkSpace()">
             Open IDE
           </button>
-        </ng-template>
       </div>
     </div>
   </div>

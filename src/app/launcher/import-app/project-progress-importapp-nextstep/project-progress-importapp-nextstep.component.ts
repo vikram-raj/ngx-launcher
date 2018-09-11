@@ -60,6 +60,13 @@ export class ProjectProgressImportappNextstepComponent implements OnChanges, OnD
     this.closeConnections();
   }
 
+  addQuery() {
+    let query = '{\"application\":[\"' + this.launcherComponent.currentSelection.projectName + '\"]}';
+    return {
+      q: query
+    };
+  }
+
   // Accessors
 
   get allCompleted(): boolean {
