@@ -7,6 +7,7 @@ import { LauncherComponent } from '../../launcher.component';
 import { ProjectSummaryService } from '../../service/project-summary.service';
 import { Broadcaster } from 'ngx-base';
 import { WorkSpacesService } from '../../service/workSpaces.service';
+import { Projectile } from '../../model/summary.model';
 import { CheService } from '../../service/che.service';
 import { Router } from '@angular/router';
 import { broadcast } from '../../shared/telemetry.decorator';
@@ -29,6 +30,7 @@ export class ProjectProgressCreateappNextstepComponent implements OnChanges, OnD
     private projectProgressService: ProjectProgressService,
     private projectSummaryService: ProjectSummaryService,
     private broadcaster: Broadcaster,
+    private projectile: Projectile,
     @Optional() private workSpaceService: WorkSpacesService,
     @Optional() private cheService: CheService,
     private router: Router) {
@@ -91,7 +93,7 @@ export class ProjectProgressCreateappNextstepComponent implements OnChanges, OnD
   retry() {
     const failedStep = this.lastCompleted;
     this.projectSummaryService.setup(
-      this.launcherComponent.summary, failedStep).subscribe(val => {
+      this.projectile, failedStep).subscribe(val => {
         this.errorMessage = null;
         if (!val || !val['uuid_link']) {
           this.errorMessage = 'Invalid response from server!';
