@@ -30,7 +30,7 @@ export class ProjectProgressCreateappNextstepComponent implements OnChanges, OnD
     private projectProgressService: ProjectProgressService,
     private projectSummaryService: ProjectSummaryService,
     private broadcaster: Broadcaster,
-    private projectile: Projectile,
+    private projectile: Projectile<any>,
     @Optional() private workSpaceService: WorkSpacesService,
     @Optional() private cheService: CheService,
     private router: Router) {
