@@ -59,7 +59,6 @@ export class LauncherComponent implements AfterViewInit, OnInit {
   @ViewChild('stepIndicator') stepIndicator: StepIndicatorComponent;
 
   public statusLink: string;
-  private _selectedSection: string;
   private _showCancelOverlay = false;
   private _steps: LauncherStep[] = [];
   private summaryCompleted = false;
@@ -73,33 +72,6 @@ export class LauncherComponent implements AfterViewInit, OnInit {
       // const id = (this.selectionParams !== undefined) ? 'GitProvider' : this.firstNonHiddenStep.id;
       // this.stepIndicator.navToStep(id);
     }, 300);
-  }
-
-  ngOnInit() {
-    // const projectName = this.route.snapshot.params['projectName'];
-    // this._summary = Object.assign(new Projectile(), {
-    //   targetEnvironment: this.flow === 'osio' ? 'os' : undefined,
-    //   dependencyCheck: {
-    //     projectName: (projectName !== undefined && projectName.length > 0) ? projectName : undefined
-    //   },
-    //   gitHubDetails: {}
-    // });
-  }
-
-  onInViewportChange(id: string) {
-    setTimeout(() => {
-      this._selectedSection = id;
-    }, 10); // Avoids ExpressionChangedAfterItHasBeenCheckedError
-  }
-
-  // Accessors
-  /**
-   * Returns the current step ID
-   *
-   * @returns {string} The current step ID
-   */
-  get selectedSection(): string {
-    return this._selectedSection;
   }
 
   /**
@@ -195,7 +167,7 @@ export class LauncherComponent implements AfterViewInit, OnInit {
   /**
    * Navigate to next step
    */
-  navToNextStep(fromStepId: string = this.selectedSection): void {
+  navToNextStep(fromStepId: string): void {
     if (fromStepId === 'ProjectSummary') {
       this.summaryCompleted = true;
       return;
