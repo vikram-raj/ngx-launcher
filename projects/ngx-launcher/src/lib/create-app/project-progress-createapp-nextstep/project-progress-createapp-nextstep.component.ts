@@ -26,7 +26,7 @@ export class ProjectProgressCreateappNextstepComponent implements OnChanges, OnD
   private _progress: Progress[];
   private socket: WebSocket;
 
-  constructor(@Host() public launcherComponent: LauncherComponent,
+  constructor(@Host() @Optional() public launcherComponent: LauncherComponent,
     private projectProgressService: ProjectProgressService,
     private projectSummaryService: ProjectSummaryService,
     private broadcaster: Broadcaster,
