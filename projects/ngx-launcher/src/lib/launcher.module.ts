@@ -56,7 +56,6 @@ import { ToastNotificationComponent } from './toast-notification/toast-notificat
 
 import { GitproviderCreateappReviewComponent } from './create-app/gitprovider-createapp-step/gitprovider-createapp-review.component';
 import { MissionRuntimeCreateappReviewComponent } from './create-app/mission-runtime-createapp-step/mission-runtime-createapp-review.component';
-import { ReviewDirective } from './create-app/project-summary-createapp-step/review.directive';
 
 import { LauncherComponent } from './launcher.component';
 import { Broadcaster } from 'ngx-base';
@@ -80,7 +79,17 @@ import { ReleaseStrategyCreateappReviewComponent } from './create-app/release-st
     TypeaheadModule.forRoot()
   ],
   exports: [
-    LauncherComponent
+    LauncherComponent,
+    StepIndicatorComponent,
+    TargetEnvironmentCreateappStepComponent,
+    MissionRuntimeCreateappStepComponent,
+    GitproviderCreateappStepComponent,
+    ProjectSummaryCreateappStepComponent,
+    TargetEnvironmentCreateappReviewComponent,
+    GitproviderCreateappReviewComponent,
+    ReleaseStrategyCreateappReviewComponent,
+    DependencyEditorReviewComponent,
+    MissionRuntimeCreateappReviewComponent
   ],
   declarations: [
     ActivateBoosterCreateappNextstepComponent,
@@ -100,7 +109,6 @@ import { ReleaseStrategyCreateappReviewComponent } from './create-app/release-st
     ProjectProgressImportappNextstepComponent,
     ProjectSummaryCreateappStepComponent,
     ProjectSummaryImportappStepComponent,
-    ReviewDirective,
     ReleaseStrategyCreateappStepComponent,
     ReleaseStrategyCreateappReviewComponent,
     ReleaseStrategyImportappStepComponent,
@@ -111,17 +119,11 @@ import { ReleaseStrategyCreateappReviewComponent } from './create-app/release-st
     ToastNotificationComponent,
     LauncherComponent
   ],
-  entryComponents: [
-    TargetEnvironmentCreateappReviewComponent,
-    GitproviderCreateappReviewComponent,
-    ReleaseStrategyCreateappReviewComponent,
-    DependencyEditorReviewComponent,
-    MissionRuntimeCreateappReviewComponent
-  ],
   providers: [
     BsDropdownConfig,
     Broadcaster,
-    Projectile
+    Projectile,
+    LauncherComponent
   ]
 })
 export class LauncherModule {
