@@ -19,6 +19,7 @@ import { broadcast } from '../../shared/telemetry.decorator';
   styleUrls: ['./project-progress-createapp-nextstep.component.less']
 })
 export class ProjectProgressCreateappNextstepComponent implements OnChanges, OnDestroy {
+  @Input() gettingStartedInfo: boolean;
   @Input() statusLink: string;
   errorMessage: string;
   codeBaseCreated = false;
@@ -32,9 +33,8 @@ export class ProjectProgressCreateappNextstepComponent implements OnChanges, OnD
     private broadcaster: Broadcaster,
     private projectile: Projectile<any>,
     @Optional() private workSpaceService: WorkSpacesService,
-    @Optional() private cheService: CheService,
-    private router: Router) {
-      this.broadcaster.on('progressEvents').subscribe((events: Progress[]) => {
+    @Optional() private cheService: CheService) {
+      broadcaster.on<Progress[]>('progressEvents').subscribe(events => {
         console.log('got the event list', events);
         this._progress = events;
       });
