@@ -10,7 +10,8 @@ import { LauncherComponent } from '../../launcher.component';
 import { ProjectSummaryService } from '../../service/project-summary.service';
 import { Broadcaster } from 'ngx-base';
 import { BroadcasterTestProvider } from '../targetenvironment-createapp-step/target-environment-createapp-step.component.spec';
-import { Projectile } from '../../model/summary.model';
+import { Projectile } from '../../model/projectile.model';
+import { ButtonNextStepComponent } from '../../shared/button-next-step.component';
 
 import { CheService } from '../../service/che.service';
 import { WorkSpacesService } from '../../service/workSpaces.service';
@@ -66,7 +67,8 @@ describe('ProjectProgressComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        ProjectProgressCreateappNextstepComponent
+        ProjectProgressCreateappNextstepComponent,
+        ButtonNextStepComponent
       ],
       providers: [
         Projectile,
