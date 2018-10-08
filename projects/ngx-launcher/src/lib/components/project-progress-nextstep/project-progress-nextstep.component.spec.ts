@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Observable, of, Subject} from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ProjectProgressCreateappNextstepComponent } from './project-progress-createapp-nextstep.component';
+import { ProjectProgressNextstepComponent } from './project-progress-nextstep.component';
 import { ProjectProgressService } from '../../service/project-progress.service';
 import { Progress } from '../../model/progress.model';
 import { LauncherComponent } from '../../launcher.component';
 import { ProjectSummaryService } from '../../service/project-summary.service';
 import { Broadcaster } from 'ngx-base';
-import { BroadcasterTestProvider } from '../targetenvironment-createapp-step/target-environment-createapp-step.component.spec';
+import { BroadcasterTestProvider } from '../targetenvironment-step/target-environment-step.component.spec';
 import { Projectile } from '../../model/projectile.model';
 import { ButtonNextStepComponent } from '../../shared/button-next-step.component';
 
@@ -56,8 +56,8 @@ const mockProjectSummaryService = {
 };
 
 describe('ProjectProgressComponent', () => {
-  let component: ProjectProgressCreateappNextstepComponent;
-  let fixture: ComponentFixture<ProjectProgressCreateappNextstepComponent>;
+  let component: ProjectProgressNextstepComponent;
+  let fixture: ComponentFixture<ProjectProgressNextstepComponent>;
   let launcherComponent: LauncherComponent;
 
   beforeEach(async(() => {
@@ -67,7 +67,7 @@ describe('ProjectProgressComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        ProjectProgressCreateappNextstepComponent,
+        ProjectProgressNextstepComponent,
         ButtonNextStepComponent
       ],
       providers: [
@@ -93,7 +93,7 @@ describe('ProjectProgressComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectProgressCreateappNextstepComponent);
+    fixture = TestBed.createComponent(ProjectProgressNextstepComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
