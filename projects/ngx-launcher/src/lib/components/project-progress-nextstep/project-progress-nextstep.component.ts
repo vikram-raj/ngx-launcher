@@ -1,12 +1,21 @@
-import { Component, Host, Input, OnChanges, OnDestroy, SimpleChanges, ViewEncapsulation, Optional } from '@angular/core';
+import {
+  Component,
+  Host,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Optional,
+  SimpleChanges,
+  ViewEncapsulation
+} from '@angular/core';
 
-import { map, switchMap } from 'rxjs/operators';
-import { Progress } from '../../model/progress.model';
-import { ProjectProgressService } from '../../service/project-progress.service';
-import { LauncherComponent } from '../../launcher.component';
-import { ProjectSummaryService } from '../../service/project-summary.service';
 import { Broadcaster } from 'ngx-base';
+import { map, switchMap } from 'rxjs/operators';
+import { LauncherComponent } from '../../launcher.component';
+import { Progress } from '../../model/progress.model';
 import { Projectile } from '../../model/projectile.model';
+import { ProjectProgressService } from '../../service/project-progress.service';
+import { ProjectSummaryService } from '../../service/project-summary.service';
 import { WorkSpacesService } from '../../service/workSpaces.service';
 import { CheService } from '../../service/che.service';
 import { Router } from '@angular/router';
