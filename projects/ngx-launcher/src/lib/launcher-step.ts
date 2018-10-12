@@ -60,12 +60,19 @@ export abstract class LauncherStep implements OnDestroy {
     }
   }
 
-  restore(): void {
-    const state = this._projectile.getSavedState(this.id);
-    if (state) {
-      this.restoreModel(state);
+  restore(context?): void {
+    if (context) {
+      this._projectile.restore(this.id, context);
+    } else {
+      if (!this.restoreModel) {
+        throw new Error('can not call restore without context and not implement restoreModel function');
+      }
+      const state = this._projectile.getSavedState(this.id);
+      if (state) {
+        this.restoreModel(state);
+      }
     }
   }
 
-  abstract restoreModel(model: any): void;
+  restoreModel?(model: any): void;
 }

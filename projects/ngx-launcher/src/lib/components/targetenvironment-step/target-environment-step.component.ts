@@ -54,7 +54,7 @@ export class TargetEnvironmentStepComponent extends LauncherStep implements OnDe
       projectVersion: '1.0.0-SNAPSHOT'
     });
     const state = new StepState(this.selection, [
-      { name: 'clusterId', value: 'cluster.id' }
+      { name: 'clusterId', value: 'cluster.id', restorePath: 'clusters.id' }
     ]);
     this.projectile.setState(this.id, state);
     if (this.launcherComponent) {
@@ -62,8 +62,8 @@ export class TargetEnvironmentStepComponent extends LauncherStep implements OnDe
     }
     if (this.tokenService) {
       this.subscriptions.push(this.tokenService.clusters.subscribe(clusters => {
-        this.restore();
         this._clusters = clusters.sort(this.clusterSortFn);
+        this.restore(this);
       }));
     }
     this.subscriptions.push(this.targetEnvironmentService.getTargetEnvironments().subscribe((val) => {
@@ -76,9 +76,12 @@ export class TargetEnvironmentStepComponent extends LauncherStep implements OnDe
         const artifactRuntime = booster.runtime.id.replace(/[.\-_]/g, '');
         const artifactMission = booster.mission.id.replace(/[.\-_]/g, '');
         this.selection.dependencyCheck.mavenArtifact = `booster-${artifactMission}-${artifactRuntime}`;
+        this.selection.dependencyCheck.groupId = 'io.openshift.booster';
+        this.selection.dependencyCheck.projectVersion = '1.0.0-SNAPSHOT';
       } else {
         this.selection.dependencyCheck.mavenArtifact = undefined;
         this.selection.dependencyCheck.groupId = undefined;
+        this.selection.dependencyCheck.projectVersion = '0.0.1';
       }
     }));
   }
@@ -124,11 +127,6 @@ export class TargetEnvironmentStepComponent extends LauncherStep implements OnDe
     if (target.id === 'zip') {
       this.selectCluster(null);
     }
-  }
-
-  restoreModel(model: any): void {
-    this.selection.cluster = this._clusters.find(c => c.id === model.clusterId);
-    this.selection.dependencyCheck = this.projectile.sharedState.state;
   }
 
   private clusterSortFn(a: Cluster, b: Cluster): number {

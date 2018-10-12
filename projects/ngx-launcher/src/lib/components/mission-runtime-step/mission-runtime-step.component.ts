@@ -52,9 +52,9 @@ export class MissionRuntimeStepComponent extends LauncherStep implements OnInit,
   ngOnInit() {
     const state = new StepState<BoosterState>(this.booster,
       [
-        {name: 'mission', value: 'mission.id'},
-        {name: 'runtime', value: 'runtime.id'},
-        {name: 'runtimeVersion', value: 'runtime.version.id'}
+        {name: 'mission', value: 'mission.id', restorePath: 'missions.id'},
+        {name: 'runtime', value: 'runtime.id', restorePath: 'runtimes.id'},
+        {name: 'runtimeVersion', value: 'runtime.version.id', restorePath: 'runtimes.versions.id'}
       ]
     );
     this.projectile.setState(this.id, state);
@@ -65,7 +65,7 @@ export class MissionRuntimeStepComponent extends LauncherStep implements OnInit,
       .subscribe(boosters => {
         this._boosters = boosters;
         this.initBoosters();
-        this.restore();
+        this.restore(this);
       }));
     this.subscriptions.push(this.broadcaster.on<Cluster>('cluster').subscribe(cluster => {
       this._cluster = cluster;
@@ -168,13 +168,6 @@ export class MissionRuntimeStepComponent extends LauncherStep implements OnInit,
         this.booster.mission.meta = supportedMission.mission.id;
       }
     }
-  }
-
-  restoreModel(model: any): void {
-    const mission = this.missions.find(m => m.id === model.mission);
-    const runtime = this.runtimes.find(r => r.id === model.runtime);
-    const version = runtime ? runtime.versions.find(v => v.id === model.runtimeVersion) : undefined;
-    this.selectBooster(mission, runtime, version);
   }
 
   private updateBoosterViewStatus(): void {

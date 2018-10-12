@@ -51,6 +51,12 @@ export class Projectile<T> {
     return JSON.parse(state);
   }
 
+  restore(stepId: string, state: any): StepState<T> {
+    const model = this.getSavedState(stepId);
+    this._state[stepId].restore(state, model);
+    return this._state[stepId];
+  }
+
   get redirectUrl(): string {
     const url = new URL(this.toUrl(), window.location.href);
     url.hash = window.location.hash;
@@ -86,10 +92,54 @@ export class Projectile<T> {
 }
 
 export class StepState<T> {
-  constructor(private _state: T, private _filters: Filter[]) {}
+  constructor(private _state: T, private _filters: Filter[]) { }
 
   save(): any {
     return this.filters.map(f => ({ name: f.name, value: _.get(this.state, f.value) }));
+  }
+
+  restore(collection, state) {
+    this.filters.map(f => _.map(
+      this.get(collection, this.basePath(f.restorePath ? f.restorePath : f.value)), e => {
+        if (this.keyValue(e, f.value) === _.get(state, f.name)) {
+          const basePath = this.basePath(f.value);
+          if (basePath.length) {
+            _.set(this.state, basePath, e);
+          } else {
+            _.merge(this.state, e);
+          }
+        }
+      }));
+  }
+
+  /**
+   * Specialised get that also gets things from collections
+   * @example
+   *    this.get({ bla: [{ test: [{ mission: 'ha' }, { mission: 'ga' }] }] }, 'bla.test.mission');
+   *    // returns ["ha", "ga"]
+   */
+  private get(object: any, path: string| string[]) {
+    if (typeof path === 'string') {
+      path = path.split('.');
+    }
+    path.map(p => {
+      if (_.isArray(object)) {
+        object = _.flatten(_.map(object, p));
+      } else {
+        object = _.get(object, p);
+      }
+    });
+    return object;
+  }
+
+  private keyValue(element: any, path: string) {
+    return _.get(element, path.split('.').pop());
+  }
+
+  private basePath(path: string) {
+    const basePath = path.split('.');
+    basePath.pop();
+    return basePath;
   }
 
   get state(): T {
@@ -102,5 +152,5 @@ export class StepState<T> {
 }
 
 export class Filter {
-  constructor(public name: string, public value: string) {}
+  constructor(public name: string, public value: string, public restorePath?: string) { }
 }

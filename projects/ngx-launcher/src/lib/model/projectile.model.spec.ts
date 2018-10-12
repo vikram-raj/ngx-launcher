@@ -1,5 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { GitHubDetails } from './github-details.model';
+import { Mission } from './mission.model';
 import { Projectile, StepState } from './projectile.model';
 
 describe('State saving and restoring', () => {
@@ -38,5 +39,27 @@ describe('State saving and restoring', () => {
     http.append('p2', 'value2');
 
     expect(projectile.toHttpPayload()).toEqual(http);
+  });
+
+  it('should restore state from an url', () => {
+    const projectile = new TestableProjectile<{mission: Mission}>();
+    const mission = new Mission();
+    const state = new StepState({mission: mission}, [
+      { name: 'missionId', value: 'mission.id' }
+    ]);
+    const id = 'health-check';
+    const description = 'some description that will not be saved';
+
+    const testStateId = 'myId';
+
+    mission.id = id;
+
+    const missions = { mission: [{ id: 'rest', description: 'rest endpoint' },
+    { id: id, description: description }, { id: 'other', description: 'some more' }]};
+
+    projectile.setState(testStateId, state);
+
+    const restoredMission = projectile.restore(testStateId, missions);
+    expect(restoredMission.state.mission.description).toEqual(description);
   });
 });
