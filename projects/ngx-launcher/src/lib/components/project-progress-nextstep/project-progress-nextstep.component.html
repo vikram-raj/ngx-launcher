@@ -156,19 +156,6 @@
     <div class="container-fluid">
       <div class="f8launcher-continue">
         <ng-content></ng-content>
-        <span *ngIf="launcherComponent.nextButtons">
-          <a class="btn btn-primary btn-lg margin-left-10 f8launcher-viewpipeline"
-            *ngIf="launcherComponent.flow === 'osio'"
-            [routerLink]="['../../../', 'create', 'pipelines']"
-            [queryParams]="addQuery()"
-            (click)="viewPipeline()">View Pipeline</a>
-          <button class="btn btn-primary btn-lg margin-left-10 f8launcher-openIDE"
-            *ngIf="launcherComponent.flow === 'osio'"
-            [disabled]="!codeBaseCreated"
-            (click)="createWorkSpace()">
-            Edit Application in Web IDE
-          </button>
-        </span>
       </div>
     </div>
   </div>

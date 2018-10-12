@@ -32,6 +32,7 @@ export class LauncherComponent implements AfterViewInit {
    */
   @Input() nextButtons = false;
 
+  /**
    * The event emitted when an cancel has been selected
    */
   @Output('onCancel') onCancel = new EventEmitter();

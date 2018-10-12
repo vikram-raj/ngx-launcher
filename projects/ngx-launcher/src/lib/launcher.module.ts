@@ -140,8 +140,6 @@ export { ProjectProgressService } from './service/project-progress.service';
 export { ProjectSummaryService } from './service/project-summary.service';
 export { TargetEnvironmentService } from './service/target-environment.service';
 export { TokenService } from './service/token.service';
-export { CheService } from './service/che.service';
-export { WorkSpacesService } from './service/workSpaces.service';
 
 // Utility Service
 export { HelperService } from './service/helper.service';

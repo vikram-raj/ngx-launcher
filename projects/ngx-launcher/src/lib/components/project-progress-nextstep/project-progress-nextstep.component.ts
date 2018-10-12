@@ -16,10 +16,6 @@ import { Progress } from '../../model/progress.model';
 import { Projectile } from '../../model/projectile.model';
 import { ProjectProgressService } from '../../service/project-progress.service';
 import { ProjectSummaryService } from '../../service/project-summary.service';
-import { WorkSpacesService } from '../../service/workSpaces.service';
-import { CheService } from '../../service/che.service';
-import { Router } from '@angular/router';
-import { broadcast } from '../../shared/telemetry.decorator';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -39,10 +35,8 @@ export class ProjectProgressNextstepComponent implements OnChanges, OnDestroy {
   constructor(@Host() @Optional() public launcherComponent: LauncherComponent,
     private projectProgressService: ProjectProgressService,
     private projectSummaryService: ProjectSummaryService,
-    private broadcaster: Broadcaster,
-    private projectile: Projectile<any>,
-    @Optional() private workSpaceService: WorkSpacesService,
-    @Optional() private cheService: CheService) {
+    broadcaster: Broadcaster,
+    private projectile: Projectile<any>) {
       broadcaster.on<Progress[]>('progressEvents').subscribe(events => {
         console.log('got the event list', events);
         this._progress = events;
@@ -113,28 +107,6 @@ export class ProjectProgressNextstepComponent implements OnChanges, OnDestroy {
         this.launcherComponent.statusLink = val['uuid_link'];
       });
   }
-
-  @broadcast('CreateFlowOpenInIDEButtonClicked', {})
-  createWorkSpace() {
-    this.cheService.getState().pipe(switchMap(che => {
-      if (!che.clusterFull) {
-        return this.workSpaceService.createWorkSpace(this.codebaseId)
-          .pipe(map(workSpaceLinks => {
-            window.open(workSpaceLinks.links.open, '_blank');
-          }));
-      }
-    })).subscribe();
-  }
-
-  addQuery() {
-    const query = '{\"application\":[\"' + this.launcherComponent.currentSelection.projectName + '\"]}';
-    return {
-      q: query
-    };
-  }
-
-  @broadcast('CreateFlowViewPipelineButtonClicked', {})
-  viewPipeline() {}
 
   // Accessors
 

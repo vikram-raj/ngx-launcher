@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, of, Subject } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Observable, of, Subject } from 'rxjs';
 
 import { Broadcaster } from 'ngx-base';
 import { LauncherComponent } from '../../launcher.component';
@@ -13,29 +13,10 @@ import { ButtonNextStepComponent } from '../../shared/button-next-step.component
 import { BroadcasterTestProvider } from '../targetenvironment-step/target-environment-step.component.spec';
 import { ProjectProgressNextstepComponent } from './project-progress-nextstep.component';
 
-import { CheService } from '../../service/che.service';
-import { WorkSpacesService } from '../../service/workSpaces.service';
-import { Che } from './../../model/che.model';
-import { WorkspaceLinks } from './../../model/workspace.model';
-
 const progressSubject: Subject<Progress[]> = new Subject();
 const mockProjectProgressService = {
   getProgress(): Observable<Progress[]> {
     return progressSubject.asObservable();
-  }
-};
-
-const workSpaceSubject: Subject<WorkspaceLinks> = new Subject();
-const mockWorkSpacesService = {
-  createWorkSpace(): Observable<WorkspaceLinks> {
-    return workSpaceSubject.asObservable();
-  }
-};
-
-const cheSubject: Subject<Che> = new Subject();
-const mockCheService = {
-  createWorkSpace(): Observable<Che> {
-    return cheSubject.asObservable();
   }
 };
 
@@ -81,12 +62,6 @@ describe('ProjectProgressComponent', () => {
         },
         {
           provide: ProjectProgressService, useValue: mockProjectProgressService
-        },
-        {
-          provide: CheService, useValue: mockCheService
-        },
-        {
-          provide: WorkSpacesService, useValue: mockWorkSpacesService
         }
       ]
     }).compileComponents();

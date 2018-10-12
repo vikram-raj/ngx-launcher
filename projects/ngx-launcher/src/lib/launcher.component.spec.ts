@@ -24,10 +24,6 @@ import {
 import { BroadcasterTestProvider } from './components/targetenvironment-step/target-environment-step.component.spec';
 import { LauncherStep } from './launcher-step';
 import { Projectile } from './model/projectile.model';
-import { CheService } from './service/che.service';
-import { WorkSpacesService } from './service/workSpaces.service';
-import { Che } from './model/che.model';
-import { WorkspaceLinks } from './model/workspace.model';
 
 @Component({
   template: `
@@ -55,20 +51,6 @@ export class Fakef8StepComponent extends LauncherStep implements OnInit {
   restoreModel(model: any): void {
   }
 }
-
-const workSpaceSubject: Subject<WorkspaceLinks> = new Subject();
-const mockWorkSpacesService = {
-  createWorkSpace(): Observable<WorkspaceLinks> {
-    return workSpaceSubject.asObservable();
-  }
-};
-
-const cheSubject: Subject<Che> = new Subject();
-const mockCheService = {
-  createWorkSpace(): Observable<Che> {
-    return cheSubject.asObservable();
-  }
-};
 
 describe('LauncherComponent', () => {
   let component: ParentComponent;
