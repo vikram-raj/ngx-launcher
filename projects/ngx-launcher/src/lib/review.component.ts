@@ -13,7 +13,7 @@ export class ReviewComponent implements OnInit {
     this.data = this.projectile.getState(this.stepId).state;
   }
 
-  navToStep(id: string) {
+  navToStep(id: string = this.stepId) {
     this.broadcaster.broadcast('navigate-to', id);
   }
 }
