@@ -8,6 +8,9 @@ const GitHubMock = require('../mock/demo-git-provider.json');
 // Enable Access-Conrtol-Expose-Headers for CORS test
 @Injectable()
 export class DemoGitProviderService implements GitProviderService {
+
+  private existingRepo = ['fabric8-ui', 'fabric8-uxd', 'patternfly'];
+
   constructor() {
   }
 
@@ -46,8 +49,7 @@ export class DemoGitProviderService implements GitProviderService {
    * @returns {Observable<boolean>} True if GitHub repo exists
    */
   isGitHubRepo(org: string, repoName: string): Observable<boolean> {
-    const result = (org === 'patternfly' && repoName === 'patternfly'); // Simulate a existing repo
-    return of(result);
+    return of(this.existingRepo.indexOf(repoName) != -1);
   }
 
   /**
@@ -56,9 +58,8 @@ export class DemoGitProviderService implements GitProviderService {
    * @param {string} org The GitHub org (e.g., fabric8-launcher/ngx-launcher)
    * @returns {Observable<boolean>} True if GitHub repo exists
    */
-  getGitHubRepoList(org: string): Observable<any> {
-    const repoList = ['fabric-ui', 'fabric-uxd'];
-    return of(repoList);
+  getGitHubRepoList(): Observable<any> {
+    return of(this.existingRepo);
   }
 
   // Private
