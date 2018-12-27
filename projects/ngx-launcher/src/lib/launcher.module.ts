@@ -42,6 +42,9 @@ import { Broadcaster } from 'ngx-base';
 import { CapabilityReviewComponent } from './components/capabilities-step/capabilities-review.component';
 import { InputComponent } from './components/capabilities-step/input.component';
 import { FrontendStepComponent } from './components/frontend-step/frontend-step.component';
+import {
+  ProjectProgressNextstepModalModule
+} from './components/project-progress-nextstep-modal/project-progress-nextstep-modal.module';
 import { ReleaseStrategyReviewComponent } from './components/release-strategy-step/release-strategy-review.component';
 import { RuntimeReviewComponent } from './components/runtime-step/runtime-review.component';
 import { RuntimeStepComponent } from './components/runtime-step/runtime-step.component';
@@ -51,6 +54,7 @@ import {
 import { LauncherComponent } from './launcher.component';
 import { Projectile } from './model/projectile.model';
 import { ButtonNextStepComponent } from './shared/button-next-step.component';
+
 
 @NgModule({
   imports: [
@@ -63,7 +67,8 @@ import { ButtonNextStepComponent } from './shared/button-next-step.component';
     SortArrayPipeModule,
     ToolbarModule,
     TruncatePipeModule,
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    ProjectProgressNextstepModalModule
   ],
   exports: [
     LauncherComponent,
@@ -78,6 +83,7 @@ import { ButtonNextStepComponent } from './shared/button-next-step.component';
     CapabilityReviewComponent,
     GitproviderStepComponent,
     ProjectSummaryStepComponent,
+    ProjectProgressNextstepModalModule,
     TargetEnvironmentReviewComponent,
     GitproviderReviewComponent,
     ReleaseStrategyStepComponent,

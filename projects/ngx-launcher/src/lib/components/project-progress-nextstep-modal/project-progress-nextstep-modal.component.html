@@ -1,0 +1,46 @@
+<div class="modal fade" bsModal #projectProgressModal="bs-modal"
+  [config]="{ keyboard: true }" tabindex="-1" role="dailog" aria-hidden="true">
+  <div class="modal-dialog f8-launcher-project-progress__modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        Application setup progress
+        <button type="button" class="close pull-right" aria-label="Close" (click)="projecProgressModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body f8-launcher-project-progress__modal-body">
+        <div class="alert f8-launcher-project-progress__alert-info">
+          <button type="button" class="close f8-launcher-project-progress__close">
+            <span class="pficon pficon-close"></span>
+          </button>
+          <strong>You can view progress later by clicking on the 'Setup Progress' link on the space dashboard.</strong>
+        </div>
+        <p>
+          "Application name" is being built...
+        </p>
+        <div class="f8-launcher-project-progress__steps-progress container-fluid"
+          *ngFor="let item of progress">
+          <div class="row">
+            <div class="row col-sm-6">
+              {{ item.message }}
+            </div>
+            <div class="row col-sm-6">
+              <span class="pficon"
+                [ngClass]="{'pficon-ok': item.completed,
+                  'pficon-in-progress fa-spin': !item.completed && !item.error,
+                  'pficon-paused': item.error}">
+              </span>
+              <strong>Completed</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default btn-lg margin-right-20">View Space Dashboard</button>
+        <button class="btn btn-primary btn-lg">
+          Open Workspace
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
